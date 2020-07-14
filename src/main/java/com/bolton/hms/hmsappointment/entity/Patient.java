@@ -1,7 +1,6 @@
 package com.bolton.hms.hmsappointment.entity;
 
 import javax.persistence.*;
-import javax.print.Doc;
 import java.util.List;
 
 @Entity
@@ -36,6 +35,14 @@ public class Patient {
         this.doctor = doctor;
     }
 
+    public Patient(int patID,String patName, String patMail, String patPassword, String patMobile, String patAddress) {
+        this.patID = patID;
+        this.patName = patName;
+        this.patMail = patMail;
+        this.patPassword = patPassword;
+        this.patMobile = patMobile;
+        this.patAddress = patAddress;
+    }
 
     public int getPatID() {
         return patID;

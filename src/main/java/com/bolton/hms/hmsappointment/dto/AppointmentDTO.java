@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class AppointmentDTO {
 
-    private String apID;
+    private int apID;
     private Date apCreaDate;
     private Date apForDate;
     private String apTime;
@@ -21,7 +21,7 @@ public class AppointmentDTO {
     public AppointmentDTO() {
     }
 
-    public AppointmentDTO(String apID, Date apCreaDate, Date apForDate, String apTime, String apDesc, PatientDTO patientDto, PaymentsDTO paymentsDto, ChargesDTO chargesDto, DoctorDTO doctorDTO) {
+    public AppointmentDTO(int apID, Date apCreaDate, Date apForDate, String apTime, String apDesc, PatientDTO patientDto, PaymentsDTO paymentsDto, ChargesDTO chargesDto, DoctorDTO doctorDTO) {
         this.apID = apID;
         this.apCreaDate = apCreaDate;
         this.apForDate = apForDate;
@@ -33,11 +33,11 @@ public class AppointmentDTO {
         this.doctorDTO = doctorDTO;
     }
 
-    public String getApID() {
+    public int getApID() {
         return apID;
     }
 
-    public void setApID(String apID) {
+    public void setApID(int apID) {
         this.apID = apID;
     }
 

@@ -1,5 +1,7 @@
 package com.bolton.hms.hmsappointment.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import javax.print.Doc;
 import java.util.List;
@@ -10,7 +12,9 @@ public class Charges {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String cID;
+//    @GeneratedValue(generator="system-uuid")
+//    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private int cID;
     private double cValue;
     private String cDesc;
 
@@ -24,16 +28,17 @@ public class Charges {
     public Charges() {
     }
 
-    public Charges(double cValue, String cDesc) {
+    public Charges(int cID,double cValue, String cDesc) {
+        this.cID = cID;
         this.cValue = cValue;
         this.cDesc = cDesc;
     }
 
-    public String getcID() {
+    public int getcID() {
         return cID;
     }
 
-    public void setcID(String cID) {
+    public void setcID(int cID) {
         this.cID = cID;
     }
 

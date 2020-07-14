@@ -33,7 +33,7 @@ public class AddDoctorServiceImpl implements AddDoctorService {
         doctor.setAdmin(new Admin(doctorDTO.getAdminDto().getAdNIC(), doctorDTO.getAdminDto().getAdName(), doctorDTO.getAdminDto().getAdMail(),
                 doctorDTO.getAdminDto().getAdMobile(), doctorDTO.getAdminDto().getAdPassword()));
 
-        doctor.setCharges(new Charges(doctorDTO.getChargesDto().getcValue(), doctorDTO.getChargesDto().getcDesc()));
+        doctor.setCharges(new Charges(doctorDTO.getChargesDto().getcID(),doctorDTO.getChargesDto().getcValue(), doctorDTO.getChargesDto().getcDesc()));
 
         doctor.setCategory(new Category(doctorDTO.getCategoryDto().getCatID(),doctorDTO.getCategoryDto().getCatDesc(),doctorDTO.getCategoryDto().getCreaDate(),
                 doctorDTO.getCategoryDto().getCreaBy()));

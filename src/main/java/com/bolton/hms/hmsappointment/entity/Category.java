@@ -1,5 +1,6 @@
 package com.bolton.hms.hmsappointment.entity;
 
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;

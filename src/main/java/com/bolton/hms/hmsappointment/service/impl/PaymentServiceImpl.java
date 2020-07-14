@@ -23,13 +23,16 @@ public class PaymentServiceImpl implements PaymentService {
     public boolean addPay(PaymentsDTO paymentsDTO) {
         Payments payments = new Payments();
 
-        payments.setPayID(paymentsDTO.getPayID());
         payments.setPayDesc(paymentsDTO.getPayDesc());
         payments.setPayDate(paymentsDTO.getPayDate());
         payments.setPayVal(paymentsDTO.getPayVal());
 
-        payments.setCharges(new Charges(paymentsDTO.getChargesDto().getcValue(), paymentsDTO.getChargesDto().getcDesc()));
+        payments.setCharges(new Charges(paymentsDTO.getChargesDto().getcID(), paymentsDTO.getChargesDto().getcValue(), paymentsDTO.getChargesDto().getcDesc()));
 
+        payments.setAppointment(new Appointment(paymentsDTO.getAppointmentDto().getApID(),paymentsDTO.getAppointmentDto().getApCreaDate(),
+                paymentsDTO.getAppointmentDto().getApForDate(), paymentsDTO.getAppointmentDto().getApTime(), paymentsDTO.getAppointmentDto().getApDesc()));
+
+        System.out.println("PAy :- " + payments.toString());
         paymentRepository.save(payments);
 
         return true;

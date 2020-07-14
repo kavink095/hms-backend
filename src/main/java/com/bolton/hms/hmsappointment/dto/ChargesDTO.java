@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ChargesDTO {
 
-    private String cID;
+    private int cID;
     private double cValue;
     private String cDesc;
 
@@ -16,17 +16,17 @@ public class ChargesDTO {
     public ChargesDTO() {
     }
 
-    public ChargesDTO(String cID, double cValue, String cDesc) {
+    public ChargesDTO(int cID, double cValue, String cDesc) {
         this.cID = cID;
         this.cValue = cValue;
         this.cDesc = cDesc;
     }
 
-    public String getcID() {
+    public int getcID() {
         return cID;
     }
 
-    public void setcID(String cID) {
+    public void setcID(int cID) {
         this.cID = cID;
     }
 

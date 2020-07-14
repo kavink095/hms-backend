@@ -10,11 +10,15 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String apID;
+    private int apID;
     private Date apCreaDate;
     private Date apForDate;
     private String apTime;
     private String apDesc;
+
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "catID", nullable = false)
+//    private Category category;
 
     @ManyToOne
     @JoinColumn(name = "patID", nullable = false)
@@ -34,22 +38,29 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Date apCreaDate, Date apForDate, String apTime, String apDesc, Patient patient, Doctor doctor, Payments payments, Charges charges) {
+    public Appointment(Date apCreaDate, Date apForDate, String apTime, String apDesc, Patient patient, Doctor doctor,Charges charges) {
         this.apCreaDate = apCreaDate;
         this.apForDate = apForDate;
         this.apTime = apTime;
         this.apDesc = apDesc;
         this.patient = patient;
         this.doctor = doctor;
-        this.payments = payments;
         this.charges = charges;
     }
 
-    public String getApID() {
+    public Appointment( int apID,Date apCreaDate, Date apForDate, String apTime, String apDesc) {
+        this.apID = apID;
+        this.apCreaDate = apCreaDate;
+        this.apForDate = apForDate;
+        this.apTime = apTime;
+        this.apDesc = apDesc;
+    }
+
+    public int getApID() {
         return apID;
     }
 
-    public void setApID(String apID) {
+    public void setApID(int apID) {
         this.apID = apID;
     }
 

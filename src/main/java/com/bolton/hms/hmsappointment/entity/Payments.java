@@ -9,12 +9,12 @@ public class Payments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String payID;
+    private int payID;
     private String payDesc;
     private Date payDate;
     private double payVal;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "apID", nullable = false)
     private Appointment appointment;
 
@@ -25,19 +25,17 @@ public class Payments {
     public Payments() {
     }
 
-    public Payments(String payDesc, Date payDate, double payVal, Appointment appointment, Charges charges) {
+    public Payments(String payDesc, Date payDate, double payVal) {
         this.payDesc = payDesc;
         this.payDate = payDate;
         this.payVal = payVal;
-        this.appointment = appointment;
-        this.charges = charges;
     }
 
-    public String getPayID() {
+    public int getPayID() {
         return payID;
     }
 
-    public void setPayID(String payID) {
+    public void setPayID(int payID) {
         this.payID = payID;
     }
 

@@ -15,7 +15,7 @@ public class Doctor {
     private String docMail;
     private String docMobile;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "adNIC", nullable = false)
     private Admin admin;
 
@@ -25,15 +25,23 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointmentList;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "cID", nullable = false)
     private Charges charges;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "catID", nullable = false)
     private Category category;
 
     public Doctor() {
+    }
+
+    public Doctor(String docNIC, String docFirstName, String docLastName, String docMail, String docMobile) {
+        this.docNIC = docNIC;
+        this.docFirstName = docFirstName;
+        this.docLastName = docLastName;
+        this.docMail = docMail;
+        this.docMobile = docMobile;
     }
 
     public Doctor(String docNIC, String docFirstName, String docLastName, String docMail, String docMobile, Admin admin, Charges charges, Category category) {

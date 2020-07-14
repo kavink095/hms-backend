@@ -15,7 +15,7 @@ public class AddChargesServiceImpl implements ChargesService {
 
     @Override
     public boolean addChrages(ChargesDTO chargesDTO) {
-        Charges charges = new Charges(chargesDTO.getcValue(), chargesDTO.getcDesc());
+        Charges charges = new Charges(chargesDTO.getcID(),chargesDTO.getcValue(), chargesDTO.getcDesc());
         System.out.println("Service Charges :- "+charges.toString());
         chargesRepository.save(charges);
         return true;
