@@ -7,6 +7,9 @@ import com.bolton.hms.hmsappointment.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AdminServiceImpl implements AdminService {
 
@@ -18,6 +21,17 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = new Admin(adminDTO.getAdNIC(), adminDTO.getAdName(), adminDTO.getAdMobile(), adminDTO.getAdMail(), adminDTO.getAdPassword());
         adminRepository.save(admin);
         return true;
+    }
+
+    @Override
+    public ArrayList<AdminDTO> getAllAdmins() {
+        List<Admin> admins = adminRepository.findAll();
+        ArrayList<AdminDTO> allAdmin = new ArrayList<>();
+        for (Admin admin : admins) {
+            AdminDTO adminDTO = new AdminDTO(admin.getAdNIC(), admin.getAdName(), admin.getAdMobile(), admin.getAdMail(), admin.getAdPassword());
+            allAdmin.add(adminDTO);
+        }
+        return allAdmin;
     }
 
     @Override
