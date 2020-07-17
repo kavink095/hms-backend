@@ -21,15 +21,12 @@ public class DoctorDTO {
     public DoctorDTO() {
     }
 
-    public DoctorDTO(String docNIC, String docFirstName, String docLastName, String docMail, String docMobile, AdminDTO adminDto, ChargesDTO chargesDto, CategoryDTO categoryDto) {
+    public DoctorDTO(String docNIC, String docFirstName, String docLastName, String docMail, String docMobile) {
         this.docNIC = docNIC;
         this.docFirstName = docFirstName;
         this.docLastName = docLastName;
         this.docMail = docMail;
         this.docMobile = docMobile;
-        this.adminDto = adminDto;
-        this.chargesDto = chargesDto;
-        this.categoryDto = categoryDto;
     }
 
     public String getDocNIC() {

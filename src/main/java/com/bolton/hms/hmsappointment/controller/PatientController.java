@@ -5,7 +5,7 @@ import com.bolton.hms.hmsappointment.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("api/v1/patients")
 public class PatientController {

@@ -7,7 +7,7 @@ import com.bolton.hms.hmsappointment.service.AddDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("api/v1/doctors")
 public class DoctorController {

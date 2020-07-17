@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("api/v1/admins")
 public class AdminController {
