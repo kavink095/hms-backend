@@ -3,6 +3,9 @@ package com.bolton.hms.hmsappointment.service.impl;
 import com.bolton.hms.hmsappointment.dto.AppointmentDTO;
 import com.bolton.hms.hmsappointment.entity.*;
 import com.bolton.hms.hmsappointment.repositories.AppointmentRepository;
+import com.bolton.hms.hmsappointment.repositories.ChargesRepository;
+import com.bolton.hms.hmsappointment.repositories.DoctorRepository;
+import com.bolton.hms.hmsappointment.repositories.PatientRepository;
 import com.bolton.hms.hmsappointment.service.AddAppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,15 @@ public class AddAppointmentServiceImpl implements AddAppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
+    @Autowired
+    private PatientRepository patientRepository;
+
+    @Autowired
+    private DoctorRepository doctorRepository;
+
+    @Autowired
+    private ChargesRepository chargesRepository;
+
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public boolean addAppointment(AppointmentDTO appointmentDTO) {
@@ -26,14 +38,11 @@ public class AddAppointmentServiceImpl implements AddAppointmentService {
         appointment.setApTime(appointmentDTO.getApTime());
         appointment.setApDesc(appointmentDTO.getApDesc());
 
-        appointment.setPatient(new Patient(appointmentDTO.getPatientDto().getPatID(),appointmentDTO.getPatientDto().getPatName(), appointmentDTO.getPatientDto().getPatMail(),
-                appointmentDTO.getPatientDto().getPatPassword(), appointmentDTO.getPatientDto().getPatMobile(), appointmentDTO.getPatientDto().getPatAddress()));
+        appointment.setPatient(patientRepository.getOne(String.valueOf(appointmentDTO.getPatientDto().getPatID())));
 
-        appointment.setDoctor(new Doctor(appointmentDTO.getDoctorDTO().getDocNIC(), appointmentDTO.getDoctorDTO().getDocFirstName(),
-                appointmentDTO.getDoctorDTO().getDocLastName(), appointmentDTO.getDoctorDTO().getDocMail(), appointmentDTO.getDoctorDTO().getDocMobile()));
+        appointment.setDoctor(doctorRepository.getOne(String.valueOf(appointmentDTO.getDoctorDTO().getDocNIC())));
 
-        appointment.setCharges(new Charges(appointmentDTO.getChargesDto().getcID(),appointmentDTO.getChargesDto().getcValue(),
-                appointmentDTO.getChargesDto().getcDesc()));
+        appointment.setCharges(chargesRepository.getOne(String.valueOf(appointmentDTO.getChargesDto().getcID())));
 
         System.out.println("app :- " + appointment.toString());
         appointmentRepository.save(appointment);

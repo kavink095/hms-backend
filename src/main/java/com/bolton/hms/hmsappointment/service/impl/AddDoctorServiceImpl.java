@@ -5,6 +5,9 @@ import com.bolton.hms.hmsappointment.entity.Admin;
 import com.bolton.hms.hmsappointment.entity.Category;
 import com.bolton.hms.hmsappointment.entity.Charges;
 import com.bolton.hms.hmsappointment.entity.Doctor;
+import com.bolton.hms.hmsappointment.repositories.AdminRepository;
+import com.bolton.hms.hmsappointment.repositories.CategoryRepository;
+import com.bolton.hms.hmsappointment.repositories.ChargesRepository;
 import com.bolton.hms.hmsappointment.repositories.DoctorRepository;
 import com.bolton.hms.hmsappointment.service.AddDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,12 @@ public class AddDoctorServiceImpl implements AddDoctorService {
 
     @Autowired
     private DoctorRepository doctorRepository;
+    @Autowired
+    private AdminRepository adminRepository;
+    @Autowired
+    private ChargesRepository chargesRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -30,13 +39,11 @@ public class AddDoctorServiceImpl implements AddDoctorService {
         doctor.setDocMobile(doctorDTO.getDocMobile());
         doctor.setDocMail(doctorDTO.getDocMobile());
 
-        doctor.setAdmin(new Admin(doctorDTO.getAdminDto().getAdNIC(), doctorDTO.getAdminDto().getAdName(), doctorDTO.getAdminDto().getAdMail(),
-                doctorDTO.getAdminDto().getAdMobile(), doctorDTO.getAdminDto().getAdPassword()));
+        doctor.setAdmin(adminRepository.getOne(doctorDTO.getAdminDto().getAdNIC()));
 
-        doctor.setCharges(new Charges(doctorDTO.getChargesDto().getcID(), doctorDTO.getChargesDto().getcValue(), doctorDTO.getChargesDto().getcDesc()));
+        doctor.setCharges(chargesRepository.getOne(String.valueOf(doctorDTO.getChargesDto().getcID())));
 
-        doctor.setCategory(new Category(doctorDTO.getCategoryDto().getCatID(), doctorDTO.getCategoryDto().getCatDesc(), doctorDTO.getCategoryDto().getCreaDate(),
-                doctorDTO.getCategoryDto().getCreaBy()));
+        doctor.setCategory(categoryRepository.getOne(doctorDTO.getCategoryDto().getCatID()));
 
         System.out.println("DoctorRepo :- " + doctor.toString());
         doctorRepository.save(doctor);
