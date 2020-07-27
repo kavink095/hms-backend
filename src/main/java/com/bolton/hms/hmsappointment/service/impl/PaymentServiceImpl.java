@@ -4,6 +4,8 @@ import com.bolton.hms.hmsappointment.dto.PaymentsDTO;
 import com.bolton.hms.hmsappointment.entity.Appointment;
 import com.bolton.hms.hmsappointment.entity.Charges;
 import com.bolton.hms.hmsappointment.entity.Payments;
+import com.bolton.hms.hmsappointment.repositories.AppointmentRepository;
+import com.bolton.hms.hmsappointment.repositories.ChargesRepository;
 import com.bolton.hms.hmsappointment.repositories.PaymentRepository;
 import com.bolton.hms.hmsappointment.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,12 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private PaymentRepository paymentRepository;
 
+    @Autowired
+    private ChargesRepository chargesRepository;
+
+    @Autowired
+    private AppointmentRepository appointmentRepository;
+
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public boolean addPay(PaymentsDTO paymentsDTO) {
@@ -27,10 +35,9 @@ public class PaymentServiceImpl implements PaymentService {
         payments.setPayDate(paymentsDTO.getPayDate());
         payments.setPayVal(paymentsDTO.getPayVal());
 
-        payments.setCharges(new Charges(paymentsDTO.getChargesDto().getcID(), paymentsDTO.getChargesDto().getcValue(), paymentsDTO.getChargesDto().getcDesc()));
+        payments.setCharges(chargesRepository.getOne(String.valueOf(paymentsDTO.getChargesDto().getcID())));
 
-        payments.setAppointment(new Appointment(paymentsDTO.getAppointmentDto().getApID(),paymentsDTO.getAppointmentDto().getApCreaDate(),
-                paymentsDTO.getAppointmentDto().getApForDate(), paymentsDTO.getAppointmentDto().getApTime(), paymentsDTO.getAppointmentDto().getApDesc()));
+        payments.setAppointment(appointmentRepository.getOne(String.valueOf(paymentsDTO.getAppointmentDto().getApID())));
 
         System.out.println("PAy :- " + payments.toString());
         paymentRepository.save(payments);
