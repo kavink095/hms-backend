@@ -41,7 +41,7 @@ public class AddDoctorServiceImpl implements AddDoctorService {
 
         doctor.setAdmin(adminRepository.getOne(doctorDTO.getAdminDto().getAdNIC()));
 
-        doctor.setCharges(chargesRepository.getOne(String.valueOf(doctorDTO.getChargesDto().getcID())));
+            doctor.setCharges(chargesRepository.getOne(String.valueOf(doctorDTO.getChargesDto().getcID())));
 
         doctor.setCategory(categoryRepository.getOne(doctorDTO.getCategoryDto().getCatID()));
 

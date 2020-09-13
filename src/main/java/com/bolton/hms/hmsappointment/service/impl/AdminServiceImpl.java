@@ -39,4 +39,18 @@ public class AdminServiceImpl implements AdminService {
         adminRepository.deleteById(nic);
         return true;
     }
+
+    @Override
+    public boolean canAuthenticate(String adminNIC, String password) {
+        List<Admin> all = adminRepository.findAll();
+        boolean res = false;
+        for (Admin admin : all) {
+            if (admin.getAdNIC().equals(adminNIC)) {
+                if (admin.getAdPassword().equals(password)) {
+                    res = true;
+                }
+            }
+        }
+        return res;
+    }
 }

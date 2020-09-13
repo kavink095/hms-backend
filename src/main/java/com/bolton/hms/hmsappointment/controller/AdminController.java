@@ -28,5 +28,10 @@ public class AdminController {
         return adminService.getAllAdmins();
     }
 
+    @PostMapping("/login")
+    public boolean canAuthenticate(@RequestBody AdminDTO adminDTO) {
+        return adminService.canAuthenticate(adminDTO.getAdNIC(), adminDTO.getAdPassword());
+    }
+
 
 }

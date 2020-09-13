@@ -10,4 +10,6 @@ public interface AdminService {
     public ArrayList<AdminDTO> getAllAdmins();
 
     public boolean deleteAdmin(String nic);
+
+    boolean canAuthenticate(String adminNIC, String password);
 }
